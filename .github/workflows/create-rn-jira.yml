@@ -13,10 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Log Content
-        run: echo |
-          '${{ github.event.inputs.jira-release-notes }}'
-
       - name: Current Date
         id: current-date
         run: echo "date=$(date -u '+%Y-%m-%d')" >> "$GITHUB_OUTPUT"

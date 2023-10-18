@@ -1,0 +1,30 @@
+name: Create Jira RN
+on:
+  workflow_dispatch:
+    inputs:
+      jira-release-notes:
+        type: string
+        description: Jira Release Notes
+
+jobs:
+  create-rn-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Current Date
+        id: current-date
+        run: echo "date=$(date -u '+%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+      
+      - uses: finnp/create-file-action@ba7436058fbdd9579be2f36fcfb1b0ed1e692ab8
+        env:
+          FILE_NAME: "release-notes/${{ steps.current-date.outputs.date }}.json"
+          FILE_DATA: ${{ github.event.inputs.jira-release-notes}}
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Jira
+          author_email: jira@wivoice.se
+          message: Add new release notes
+          

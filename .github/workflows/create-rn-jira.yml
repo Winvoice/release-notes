@@ -14,7 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Log Content
-        run: echo ${{ github.event.inputs.jira-release-notes }}
+        run: echo |
+          ${{ github.event.inputs.jira-release-notes }}
 
       - name: Current Date
         id: current-date

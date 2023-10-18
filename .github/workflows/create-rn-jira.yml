@@ -15,7 +15,7 @@ jobs:
 
       - name: Log Content
         run: echo |
-          ${{ github.event.inputs.jira-release-notes }}
+          '${{ github.event.inputs.jira-release-notes }}'
 
       - name: Current Date
         id: current-date
